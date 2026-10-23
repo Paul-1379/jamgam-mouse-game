@@ -1,0 +1,196 @@
+[gd_scene format=3 uid="uid://54dyuvkvmg1o"]
+
+[ext_resource type="Script" uid="uid://ehrnc3olbnid" path="res://scripts/player.gd" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://k43g7ty6rgjs" path="res://scenes/film_grain.tscn" id="1_eb6dy"]
+[ext_resource type="Texture2D" uid="uid://s6rjw0i5hdel" path="res://mouse.png" id="1_o5qli"]
+[ext_resource type="Texture2D" uid="uid://dsl3g5edg0ahf" path="res://trash closed.png" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://bbggfyf7wneyl" path="res://scripts/trash_pedal.gd" id="3_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://c555inywdl0um" path="res://trash opened.png" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://c0x8xwbmpjuj1" path="res://sprites/cat/cat0000.png" id="6_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://c5j7jhjrne3iq" path="res://sprites/cat/cat0001.png" id="7_eb6dy"]
+[ext_resource type="Texture2D" uid="uid://bs46xegi4cwer" path="res://sprites/cat/cat0002.png" id="8_trceg"]
+[ext_resource type="Script" uid="uid://belkyd07tduhl" path="res://scripts/cat.gd" id="9_85g3d"]
+[ext_resource type="Texture2D" uid="uid://ichpc4vefxit" path="res://sprites/cat/cat0003.png" id="9_a8y0u"]
+[ext_resource type="Texture2D" uid="uid://cenhr3bboksc4" path="res://sprites/cat/cat0004.png" id="10_jkv2x"]
+[ext_resource type="Texture2D" uid="uid://blbls6y6ejm52" path="res://background.png" id="13_trceg"]
+[ext_resource type="Texture2D" uid="uid://b8lghxlricnbm" path="res://sprites/star particles/image0000.png" id="14_a8y0u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_grofb"]
+size = Vector2(30, 13)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_grofb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i1m3l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ya4ey")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ya4ey")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_eb6dy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_trceg")
+}],
+"loop": 0,
+"name": &"getting up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_a8y0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jkv2x")
+}],
+"loop": 1,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a8y0u"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_a8y0u"]
+offsets = PackedFloat32Array(0, 0.29078013, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5pbw"]
+size = Vector2(196, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_grofb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_tefeu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sugp2")
+}],
+"loop": 0,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_sugp2")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_sugp2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_tefeu")
+}],
+"loop": 0,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i1m3l"]
+
+[node name="Main" type="Node2D" unique_id=978919264]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1391889480]
+position = Vector2(960, 540)
+texture = ExtResource("13_trceg")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1839915379 node_paths=PackedStringArray("player_sprite")]
+script = ExtResource("1_0wfyh")
+player_sprite = NodePath("PlayerSprite")
+
+[node name="PlayerSprite" type="Sprite2D" parent="Player" unique_id=1881736507]
+z_index = 5
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_o5qli")
+
+[node name="PlayerCollisionShape" type="CollisionShape2D" parent="Player" unique_id=738108420]
+position = Vector2(6, 2)
+shape = SubResource("RectangleShape2D_grofb")
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=694600304]
+position = Vector2(611, 861)
+
+[node name="GroundCollisionShape" type="CollisionShape2D" parent="Ground" unique_id=54539658]
+shape = SubResource("WorldBoundaryShape2D_grofb")
+
+[node name="Cat0000" type="AnimatedSprite2D" parent="." unique_id=648894788 node_paths=PackedStringArray("player")]
+position = Vector2(157, 783)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_i1m3l")
+animation = &"walking"
+frame = 1
+frame_progress = 0.44253588
+script = ExtResource("9_85g3d")
+player = NodePath("../Player")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Cat0000" unique_id=852286421]
+material = SubResource("CanvasItemMaterial_a8y0u")
+position = Vector2(222, -92)
+scale = Vector2(2, 2)
+emitting = false
+amount = 5
+texture = ExtResource("14_a8y0u")
+lifetime = 0.24000000000000002
+one_shot = true
+explosiveness = 0.78
+randomness = 1.0
+lifetime_randomness = 0.45
+emission_shape = 2
+emission_sphere_radius = 22.05
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 567.08
+initial_velocity_max = 710.56
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+color_ramp = SubResource("Gradient_a8y0u")
+anim_offset_max = 1.0
+
+[node name="Head area" type="Area2D" parent="Cat0000" unique_id=1261720736]
+position = Vector2(236, -96)
+
+[node name="head collision shape" type="CollisionShape2D" parent="Cat0000/Head area" unique_id=4731989]
+shape = SubResource("RectangleShape2D_q5pbw")
+
+[node name="trash pedal" type="Area2D" parent="." unique_id=1727292490 node_paths=PackedStringArray("trash", "raycast", "particles")]
+position = Vector2(766, 850)
+script = ExtResource("3_tbgi4")
+trash = NodePath("TrashSprites")
+raycast = NodePath("RayCast2D")
+particles = NodePath("../Cat0000/CPUParticles2D")
+
+[node name="TrashSprites" type="AnimatedSprite2D" parent="trash pedal" unique_id=747775813]
+position = Vector2(-7, -70)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_grofb")
+
+[node name="trashPedalCollisionShape" type="CollisionShape2D" parent="trash pedal" unique_id=1096054105]
+position = Vector2(2, -2)
+shape = SubResource("RectangleShape2D_i1m3l")
+
+[node name="RayCast2D" type="RayCast2D" parent="trash pedal" unique_id=1485739014]
+position = Vector2(-2, -73)
+rotation = 3.1415927
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="film grain" parent="." unique_id=162127344 instance=ExtResource("1_eb6dy")]
+
+[connection signal="body_entered" from="trash pedal" to="trash pedal" method="_on_body_entered"]
