@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var player_sprite: Sprite2D
+@export var player_sprite: AnimatedSprite2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -550.0
 const JUMP_RELEASE = 200
@@ -26,7 +26,9 @@ func _physics_process(delta: float) -> void:
 		player_sprite.flip_h = false if direction == 1 else true
 	if direction:
 		velocity.x = direction * SPEED
+		player_sprite.play("walking")
 	else:
+		player_sprite.play("default")
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()

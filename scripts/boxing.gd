@@ -11,6 +11,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if can_be_grabbed and Input.is_action_just_pressed("grab"):
 		grabbed = not grabbed
+		print(grabbed)
 		if grabbed:
 			offset_before_grabbed = position - player.position
 		else:
@@ -33,4 +34,5 @@ func _on_grab_area_body_exited(body: Node2D) -> void:
 func _on_player_jumped() -> void:
 	if grabbed:
 		if $RayCast2D.is_colliding() and $RayCast2D.get_collider().name == "Head area":
+			$"punch sound".play()
 			cat_crushed_signal.emit(task_name)

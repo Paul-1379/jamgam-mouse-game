@@ -36,6 +36,7 @@ func drink():
 	if trap_cat:
 		play("trap")
 		task_text.task_completed(task_name)
+		$"trap sound".play()
 		await get_tree().create_timer(2.0).timeout
 		play("default")
 func _on_grab_area_body_exited(body: Node2D) -> void:

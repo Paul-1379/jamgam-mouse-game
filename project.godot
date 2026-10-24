@@ -13,6 +13,7 @@ config_version=5
 config/name="mouse game"
 run/main_scene="uid://54dyuvkvmg1o"
 config/features=PackedStringArray("4.7", "Mobile")
+boot_splash/image="uid://cvqbkm8b5e8sw"
 
 [display]
 

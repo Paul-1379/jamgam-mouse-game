@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 	if direction != 0:
 		flip_h = false if direction == 1 else true
 		$"Head area".position.x = 225 if direction == 1 else -225
-	if abs(player.position.x - position.x) > SPEED * 2 and animation == "walking":
+	if abs(player.position.x - position.x) > SPEED * 1.5 and animation == "walking":
 		position.x += SPEED * direction * delta
 
 func _on_cat_crushed_signal(_task_name) -> void:

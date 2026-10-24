@@ -10,6 +10,7 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if 'Player' in body.name and body.position.y < position.y:
 		trash.play("open")
+		$"trash sound".play()
 		if raycast.is_colliding():
 			particles.emitting = true
 			cat_crushed_signal.emit(name_of_task)

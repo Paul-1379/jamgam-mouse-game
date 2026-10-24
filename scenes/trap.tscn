@@ -25,6 +25,26 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.1584723, 0.15847233, 0.1584723, 1)
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1756938863]
+z_index = -1
+position = Vector2(1065, 694.5)
+amount = 100
+texture = ExtResource("2_62q8x")
+lifetime = 7.0
+emission_shape = 3
+emission_rect_extents = Vector2(1080, 720)
+spread = 180.0
+gravity = Vector2(0, 0)
+angular_velocity_min = -150.0
+angular_velocity_max = 150.0
+orbit_velocity_min = 0.01
+orbit_velocity_max = 0.01
+radial_accel_min = 30.0
+radial_accel_max = 50.0
+angle_max = 360.0
+scale_amount_min = 0.5
+color_ramp = SubResource("Gradient_grofb")
+
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=1013194138]
 z_index = 1
 layout_mode = 0
@@ -58,25 +78,5 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 40
 text = "Retry"
 script = ExtResource("1_npg1n")
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="ColorRect2/VBoxContainer" unique_id=1756938863]
-z_index = -1
-position = Vector2(236, 350.5)
-amount = 100
-texture = ExtResource("2_62q8x")
-lifetime = 7.0
-emission_shape = 3
-emission_rect_extents = Vector2(1080, 720)
-spread = 180.0
-gravity = Vector2(0, 0)
-angular_velocity_min = -150.0
-angular_velocity_max = 150.0
-orbit_velocity_min = 0.01
-orbit_velocity_max = 0.01
-radial_accel_min = 30.0
-radial_accel_max = 50.0
-angle_max = 360.0
-scale_amount_min = 0.5
-color_ramp = SubResource("Gradient_grofb")
 
 [connection signal="pressed" from="ColorRect2/VBoxContainer/Button" to="ColorRect2/VBoxContainer/Button" method="_on_pressed"]
