@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://tn1bjlai5etu"]
+
+[ext_resource type="Script" uid="uid://bt873h5ubivs5" path="res://scripts/retry_button.gd" id="1_npg1n"]
+[ext_resource type="Texture2D" uid="uid://cb4sbtsj24egt" path="res://cat logo.png" id="2_62q8x"]
+
+[sub_resource type="Gradient" id="Gradient_grofb"]
+offsets = PackedFloat32Array(0, 0.15248227, 0.78368795, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Trap" type="Control" unique_id=1695815419]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1632882385]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1584723, 0.15847233, 0.1584723, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1013194138]
+z_index = 1
+layout_mode = 0
+offset_left = 829.0
+offset_top = 344.0
+offset_right = 1204.0
+offset_bottom = 714.0
+color = Color(0, 0, 0, 0.5529412)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect2" unique_id=210949389]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="ColorRect2/VBoxContainer" unique_id=20723699]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "You have been trapped
+
+this is the end of the mouse's supremacy"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="ColorRect2/VBoxContainer" unique_id=44402372]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 40
+text = "Retry"
+script = ExtResource("1_npg1n")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="ColorRect2/VBoxContainer" unique_id=1756938863]
+z_index = -1
+position = Vector2(236, 350.5)
+amount = 100
+texture = ExtResource("2_62q8x")
+lifetime = 7.0
+emission_shape = 3
+emission_rect_extents = Vector2(1080, 720)
+spread = 180.0
+gravity = Vector2(0, 0)
+angular_velocity_min = -150.0
+angular_velocity_max = 150.0
+orbit_velocity_min = 0.01
+orbit_velocity_max = 0.01
+radial_accel_min = 30.0
+radial_accel_max = 50.0
+angle_max = 360.0
+scale_amount_min = 0.5
+color_ramp = SubResource("Gradient_grofb")
+
+[connection signal="pressed" from="ColorRect2/VBoxContainer/Button" to="ColorRect2/VBoxContainer/Button" method="_on_pressed"]

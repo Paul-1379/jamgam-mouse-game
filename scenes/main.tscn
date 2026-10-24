@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dsl3g5edg0ahf" path="res://trash closed.png" id="3_sugp2"]
 [ext_resource type="Script" uid="uid://bbggfyf7wneyl" path="res://scripts/trash_pedal.gd" id="3_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://c555inywdl0um" path="res://trash opened.png" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://xd2fmpnjnb4y" path="res://sprites/cat/cat0005.png" id="5_yc10j"]
+[ext_resource type="Texture2D" uid="uid://30nhmnjyr78g" path="res://sprites/cat/cat0006.png" id="6_gqmmt"]
 [ext_resource type="Texture2D" uid="uid://c0x8xwbmpjuj1" path="res://sprites/cat/cat0000.png" id="6_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://c5j7jhjrne3iq" path="res://sprites/cat/cat0001.png" id="7_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://bs46xegi4cwer" path="res://sprites/cat/cat0002.png" id="8_trceg"]
@@ -14,6 +16,13 @@
 [ext_resource type="Texture2D" uid="uid://cenhr3bboksc4" path="res://sprites/cat/cat0004.png" id="10_jkv2x"]
 [ext_resource type="Texture2D" uid="uid://blbls6y6ejm52" path="res://background.png" id="13_trceg"]
 [ext_resource type="Texture2D" uid="uid://b8lghxlricnbm" path="res://sprites/star particles/image0000.png" id="14_a8y0u"]
+[ext_resource type="Texture2D" uid="uid://wvchcn8anjwl" path="res://sprites/mouse trap/image0000.png" id="15_jkv2x"]
+[ext_resource type="Texture2D" uid="uid://b3xener6f4hcu" path="res://sprites/mouse trap/image0001.png" id="16_jbj1t"]
+[ext_resource type="Script" uid="uid://b0xa5op2rk7lh" path="res://scripts/mouse_trap.gd" id="17_muem4"]
+[ext_resource type="Texture2D" uid="uid://cusl6xm8c65wm" path="res://sprites/milk.png" id="20_gqmmt"]
+[ext_resource type="Script" uid="uid://bxu4alnn6grmg" path="res://scripts/tasks_text.gd" id="21_yc10j"]
+[ext_resource type="Texture2D" uid="uid://ny75wwuktmwu" path="res://sprites/boxing.png" id="22_jscy8"]
+[ext_resource type="Script" uid="uid://bi0s7ajho7e15" path="res://scripts/boxing.gd" id="23_pm3ni"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_grofb"]
 size = Vector2(30, 13)
@@ -24,10 +33,32 @@ size = Vector2(30, 13)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("9_a8y0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_yc10j")
+}],
+"loop": 0,
+"name": &"crushed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("6_ya4ey")
 }],
 "loop": 1,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_jkv2x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gqmmt")
+}],
+"loop": 0,
+"name": &"drinking",
 "speed": 5.0
 }, {
 "frames": [{
@@ -104,6 +135,40 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i1m3l"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ddhgf"]
+size = Vector2(75, 42.5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q5pbw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_jkv2x")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_jkv2x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_jbj1t")
+}],
+"loop": 0,
+"name": &"trap",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_piuou"]
+size = Vector2(43.33362, 46.666504)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yc10j"]
+size = Vector2(343.33252, 180)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhxjy"]
+size = Vector2(129.12915, 72.0719)
+
 [node name="Main" type="Node2D" unique_id=978919264]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1391889480]
@@ -129,24 +194,23 @@ position = Vector2(611, 861)
 [node name="GroundCollisionShape" type="CollisionShape2D" parent="Ground" unique_id=54539658]
 shape = SubResource("WorldBoundaryShape2D_grofb")
 
-[node name="Cat0000" type="AnimatedSprite2D" parent="." unique_id=648894788 node_paths=PackedStringArray("player")]
-position = Vector2(157, 783)
+[node name="Cat" type="AnimatedSprite2D" parent="." unique_id=648894788 node_paths=PackedStringArray("player", "mouse_trap")]
+position = Vector2(275, 776.305)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_i1m3l")
-animation = &"walking"
-frame = 1
-frame_progress = 0.44253588
+animation = &"crushed"
 script = ExtResource("9_85g3d")
 player = NodePath("../Player")
+mouse_trap = NodePath("../MouseTrapSprite")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Cat0000" unique_id=852286421]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Cat" unique_id=852286421]
 material = SubResource("CanvasItemMaterial_a8y0u")
 position = Vector2(222, -92)
 scale = Vector2(2, 2)
 emitting = false
 amount = 5
 texture = ExtResource("14_a8y0u")
-lifetime = 0.24000000000000002
+lifetime = 0.24
 one_shot = true
 explosiveness = 0.78
 randomness = 1.0
@@ -162,18 +226,19 @@ scale_amount_max = 0.3
 color_ramp = SubResource("Gradient_a8y0u")
 anim_offset_max = 1.0
 
-[node name="Head area" type="Area2D" parent="Cat0000" unique_id=1261720736]
-position = Vector2(236, -96)
+[node name="Head area" type="Area2D" parent="Cat" unique_id=1261720736]
+position = Vector2(225, -100)
 
-[node name="head collision shape" type="CollisionShape2D" parent="Cat0000/Head area" unique_id=4731989]
+[node name="head collision shape" type="CollisionShape2D" parent="Cat/Head area" unique_id=4731989]
 shape = SubResource("RectangleShape2D_q5pbw")
 
 [node name="trash pedal" type="Area2D" parent="." unique_id=1727292490 node_paths=PackedStringArray("trash", "raycast", "particles")]
 position = Vector2(766, 850)
 script = ExtResource("3_tbgi4")
+name_of_task = "crush the cat's face with the trash can pedal"
 trash = NodePath("TrashSprites")
 raycast = NodePath("RayCast2D")
-particles = NodePath("../Cat0000/CPUParticles2D")
+particles = NodePath("../Cat/CPUParticles2D")
 
 [node name="TrashSprites" type="AnimatedSprite2D" parent="trash pedal" unique_id=747775813]
 position = Vector2(-7, -70)
@@ -193,4 +258,127 @@ collide_with_bodies = false
 
 [node name="film grain" parent="." unique_id=162127344 instance=ExtResource("1_eb6dy")]
 
+[node name="Milkbody" type="StaticBody2D" parent="." unique_id=444200916]
+position = Vector2(1319, 787)
+scale = Vector2(0.8, 0.8)
+
+[node name="MilkSprite" type="Sprite2D" parent="Milkbody" unique_id=762269030]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("20_gqmmt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Milkbody" unique_id=1715329560]
+polygon = PackedVector2Array(31.25, 71.25, 76.25, 60, 56.25, 93.75, -71.25, 95, -100, 57.5, -53.75, 70)
+
+[node name="drink trigger area" type="StaticBody2D" parent="Milkbody" unique_id=371894039]
+position = Vector2(-3.7499995, -74.99999)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Milkbody/drink trigger area" unique_id=1404421308]
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_ddhgf")
+
+[node name="MouseTrapSprite" type="AnimatedSprite2D" parent="." unique_id=887620561 node_paths=PackedStringArray("player", "task_text")]
+position = Vector2(1013, 846)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_q5pbw")
+flip_h = true
+script = ExtResource("17_muem4")
+player = NodePath("../Player")
+task_name = "put the mouse trap in the cat's milk"
+task_text = NodePath("../UI/Tasks/tasks text")
+
+[node name="TrapArea" type="Area2D" parent="MouseTrapSprite" unique_id=2042694645]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseTrapSprite/TrapArea" unique_id=1526267869]
+position = Vector2(-31.66626, -6.666748)
+shape = SubResource("RectangleShape2D_piuou")
+
+[node name="GrabArea" type="Area2D" parent="MouseTrapSprite" unique_id=1560290810]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseTrapSprite/GrabArea" unique_id=2096839102]
+position = Vector2(-31.66626, -6.666748)
+shape = SubResource("RectangleShape2D_yc10j")
+
+[node name="UI" type="Control" parent="." unique_id=2132213327]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GrabInfo" type="Label" parent="UI" unique_id=231264012]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -303.0
+offset_right = 160.0
+offset_bottom = -229.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Press \"g\" to grab"
+horizontal_alignment = 1
+
+[node name="Tasks" type="TextureRect" parent="UI" unique_id=519042058]
+layout_mode = 0
+offset_left = 1425.0
+offset_top = 27.0
+offset_right = 1869.0
+offset_bottom = 623.0
+
+[node name="tasks text" type="RichTextLabel" parent="UI/Tasks" unique_id=1279390347]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 42.0
+offset_top = 52.0
+offset_right = -42.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+script = ExtResource("21_yc10j")
+
+[node name="Boxing" type="Sprite2D" parent="." unique_id=565846189 node_paths=PackedStringArray("player")]
+position = Vector2(1656, 788.99994)
+scale = Vector2(0.666, 0.666)
+texture = ExtResource("22_jscy8")
+script = ExtResource("23_pm3ni")
+task_name = "box the cat with the blue boxing glove"
+player = NodePath("../Player")
+
+[node name="GrabArea" type="Area2D" parent="Boxing" unique_id=1717319191]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boxing/GrabArea" unique_id=1348903141]
+position = Vector2(0, 66.06604)
+shape = SubResource("RectangleShape2D_bhxjy")
+
+[node name="RayCast2D" type="RayCast2D" parent="Boxing" unique_id=233270569]
+target_position = Vector2(0, -200)
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[connection signal="jumped" from="Player" to="Boxing" method="_on_player_jumped"]
+[connection signal="body_entered" from="Cat/Head area" to="Cat" method="_on_head_area_body_entered"]
 [connection signal="body_entered" from="trash pedal" to="trash pedal" method="_on_body_entered"]
+[connection signal="cat_crushed_signal" from="trash pedal" to="Cat" method="_on_cat_crushed_signal"]
+[connection signal="cat_crushed_signal" from="trash pedal" to="UI/Tasks/tasks text" method="task_completed"]
+[connection signal="body_entered" from="MouseTrapSprite/TrapArea" to="MouseTrapSprite" method="_on_trap_area_body_entered"]
+[connection signal="body_entered" from="MouseTrapSprite/GrabArea" to="MouseTrapSprite" method="_on_grab_area_body_entered"]
+[connection signal="body_exited" from="MouseTrapSprite/GrabArea" to="MouseTrapSprite" method="_on_grab_area_body_exited"]
+[connection signal="cat_crushed_signal" from="Boxing" to="Cat" method="_on_cat_crushed_signal"]
+[connection signal="cat_crushed_signal" from="Boxing" to="UI/Tasks/tasks text" method="task_completed"]
+[connection signal="body_entered" from="Boxing/GrabArea" to="Boxing" method="_on_grab_area_body_entered"]
+[connection signal="body_exited" from="Boxing/GrabArea" to="Boxing" method="_on_grab_area_body_exited"]
